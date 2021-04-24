@@ -30,6 +30,18 @@ type State struct {
 	players Players
 }
 
+func NewGame(name string) State {
+	return State{
+		id:   uuid.New().String(),
+		name: strings.TrimSpace(name),
+	}
+}
+
+func AddPlayer(s State, id, name string) State {
+	s.players = append(s.players, Player{id: id, name: name})
+	return s
+}
+
 func (s State) GetID() string {
 	return s.id
 }
@@ -46,10 +58,4 @@ type Player struct {
 
 func (s State) GetListOfPlayers() Players {
 	return s.players
-}
-
-func (s State) NewGame(name string) State {
-	s.id = uuid.New().String()
-	s.name = strings.TrimSpace(name)
-	return s
 }

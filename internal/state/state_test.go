@@ -47,11 +47,9 @@ func TestDefault(t *testing.T) {
 }
 
 func TestInitialization(t *testing.T) {
-	// Given a new state
-	s := State{}
 	// When we initialize a new game with the name "Staampeed"
 	gameName := "Staampeed"
-	s = s.NewGame(gameName)
+	s := NewGame(gameName)
 	// Then we should get a valid UUID for the ID
 	id := s.GetID()
 	if id == "" {
@@ -62,5 +60,27 @@ func TestInitialization(t *testing.T) {
 	if expected := gameName; name != expected {
 		t.Errorf("name: expected %q, got %q\n", expected, name)
 	}
-
 }
+
+func TestPlayers(t *testing.T) {
+	// Given a new game
+	s := NewGame("test-players")
+	// When we add a player with the name "Jane" and ID "JANE"
+	playerId, playerName := "JANE", "Jane"
+	s = AddPlayer(s, playerId, playerName)
+	// And we fetch the list of players
+	players := s.GetListOfPlayers()
+	// Then we should get a list containing one player
+	if expected := 1; len(players) != expected {
+		t.Fatalf("players: expected %d, got %d\n", expected, len(players))
+	}
+	// And the name should be "Jane"
+	if expected := playerId; players[0].id != expected {
+		t.Errorf("player: expected id %q, got %q\n", expected, players[0].id)
+	}
+	// And ID "JANE"
+	if expected := playerName; players[0].name != expected {
+		t.Errorf("player: expected name %q, got %q\n", expected, players[0].name)
+	}
+}
+

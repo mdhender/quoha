@@ -43,6 +43,17 @@ func AddPlayer(s State, id, name string) State {
 	return s
 }
 
+func AddSystem(s State, id, name string, x, y, z float64) State {
+	s.systems = append(s.systems, System{
+		id:   id,
+		name: name,
+		x:    x,
+		y:    y,
+		z:    z,
+	})
+	return s
+}
+
 func (s State) GetID() string {
 	return s.id
 }
@@ -63,8 +74,9 @@ func (s State) GetListOfPlayers() Players {
 
 type Systems []System
 type System struct {
-	id string // uuid
-	name string
+	id      string // uuid
+	name    string
+	x, y, z float64
 }
 
 func (s State) GetListOfSystems() Systems {

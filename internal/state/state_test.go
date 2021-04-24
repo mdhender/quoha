@@ -80,12 +80,44 @@ func TestPlayers(t *testing.T) {
 	if expected := 1; len(players) != expected {
 		t.Fatalf("players: expected %d, got %d\n", expected, len(players))
 	}
-	// And the name should be "Jane"
+	// And ID "JANE"
 	if expected := playerId; players[0].id != expected {
 		t.Errorf("player: expected id %q, got %q\n", expected, players[0].id)
 	}
-	// And ID "JANE"
+	// And the name should be "Jane"
 	if expected := playerName; players[0].name != expected {
 		t.Errorf("player: expected name %q, got %q\n", expected, players[0].name)
+	}
+}
+
+func TestSystems(t *testing.T) {
+	// Given a new game
+	s := NewGame("test-systems")
+	// When we add a system with the ID "STELLA," name "Stella," and coordinates (1,2,3)
+	systemId, systemName, x, y, z := "STELLA", "Stella", 1.0, 2.0, 3.0
+	s = AddSystem(s, systemId, systemName, x, y, z)
+	// And we fetch the list of systems
+	systems := s.GetListOfSystems()
+	// Then we should get a list containing one system
+	if expected := 1; len(systems) != expected {
+		t.Fatalf("systems: expected %d, got %d\n", expected, len(systems))
+	}
+	// And the ID should be "STELLA"
+	if expected := systemId; systems[0].id != expected {
+		t.Errorf("system: expected name %q, got %q\n", expected, systems[0].id)
+	}
+	// And the name should be "Stella"
+	if expected := systemName; systems[0].name != expected {
+		t.Errorf("system: expected name %q, got %q\n", expected, systems[0].name)
+	}
+	// And the coordinates should be (1,2,3)
+	if expected := x; systems[0].x != expected {
+		t.Errorf("system: x: expected %f, got %f\n", expected, systems[0].x)
+	}
+	if expected := y; systems[0].y != expected {
+		t.Errorf("system: y: expected %f, got %f\n", expected, systems[0].y)
+	}
+	if expected := z; systems[0].z != expected {
+		t.Errorf("system: z: expected %f, got %f\n", expected, systems[0].z)
 	}
 }

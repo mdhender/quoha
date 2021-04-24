@@ -38,11 +38,17 @@ func TestDefault(t *testing.T) {
 	if expected := ""; name != expected {
 		t.Errorf("name: expected %q, got %q\n", expected, name)
 	}
-	// When we execute the list of players
+	// When we fetch the list of players
 	players := s.GetListOfPlayers()
 	// Then we should get an empty list of players
 	if expected := 0; len(players) != expected {
 		t.Errorf("players: expected %d, got %d\n", expected, len(players))
+	}
+	// When we fetch the list of systems
+	systems := s.GetListOfSystems()
+	// Then we should get an empty list of systems
+	if expected := 0; len(systems) != expected {
+		t.Errorf("systems: expected %d, got %d\n", expected, len(systems))
 	}
 }
 
@@ -83,4 +89,3 @@ func TestPlayers(t *testing.T) {
 		t.Errorf("player: expected name %q, got %q\n", expected, players[0].name)
 	}
 }
-

@@ -28,6 +28,7 @@ type State struct {
 	id      string // uuid
 	name    string
 	players Players
+	systems Systems
 }
 
 func NewGame(name string) State {
@@ -58,4 +59,14 @@ type Player struct {
 
 func (s State) GetListOfPlayers() Players {
 	return s.players
+}
+
+type Systems []System
+type System struct {
+	id string // uuid
+	name string
+}
+
+func (s State) GetListOfSystems() Systems {
+	return s.systems
 }

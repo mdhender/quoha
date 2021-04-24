@@ -45,3 +45,22 @@ func TestDefault(t *testing.T) {
 		t.Errorf("players: expected %d, got %d\n", expected, len(players))
 	}
 }
+
+func TestInitialization(t *testing.T) {
+	// Given a new state
+	s := State{}
+	// When we initialize a new game with the name "Staampeed"
+	gameName := "Staampeed"
+	s = s.NewGame(gameName)
+	// Then we should get a valid UUID for the ID
+	id := s.GetID()
+	if id == "" {
+		t.Errorf("id: expected UUID, got %q\n", id)
+	}
+	// And we should get the name we requested
+	name := s.GetName()
+	if expected := gameName; name != expected {
+		t.Errorf("name: expected %q, got %q\n", expected, name)
+	}
+
+}

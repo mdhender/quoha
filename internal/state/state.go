@@ -19,6 +19,11 @@
 
 package state
 
+import (
+	"github.com/google/uuid"
+	"strings"
+)
+
 type State struct {
 	id      string // uuid
 	name    string
@@ -41,4 +46,10 @@ type Player struct {
 
 func (s State) GetListOfPlayers() Players {
 	return s.players
+}
+
+func (s State) NewGame(name string) State {
+	s.id = uuid.New().String()
+	s.name = strings.TrimSpace(name)
+	return s
 }
